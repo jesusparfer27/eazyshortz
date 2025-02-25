@@ -1,5 +1,5 @@
-import { URL } from "../models/url.model.js";
-import { nanoid } from "nanoid"; // 📌 Para generar short_code único
+import { URL } from "../db/mongodb.js";
+import { nanoid } from "nanoid";
 
 // 📌 **Crear una URL corta**
 export const shortenURL = async (req, res) => {
