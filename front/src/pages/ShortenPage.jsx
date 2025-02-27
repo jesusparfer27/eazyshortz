@@ -55,12 +55,15 @@ export const ShortenPage = () => {
                     title: title || "Custom Title"
                 }),
             });
-        
+    
             const data = await response.json();
-            console.log("Server response:", data); // 👀 Revisa qué responde el servidor
-        
+            console.log("Server response:", data); // 🔍 Para verificar qué responde el servidor
+    
             if (response.ok) {
-                setShortUrl(data.short_url);
+                // 🔥 Construimos la URL corta usando el short_code
+                const baseShortUrl = "https://eazyshortz.vercel.app/";
+                setShortUrl(`${baseShortUrl}${data.short_code}`);
+    
                 setUrl("");
                 setTitle("");
             } else {
@@ -70,10 +73,10 @@ export const ShortenPage = () => {
             console.error("Error shortening URL:", error);
             setError("Failed to shorten the URL.");
         }
-        
     
         setLoading(false);
     };
+    
 
     // 🔥 Nueva función para limpiar los inputs y estados
     // const handleClear = () => {
