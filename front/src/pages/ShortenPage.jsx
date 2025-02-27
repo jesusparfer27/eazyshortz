@@ -47,7 +47,7 @@ export const ShortenPage = () => {
         setLoading(true);
     
         try {
-            const response = await fetch(`${VITE_FULL_HOST}/shorten`, {
+            const response = await fetch(`${VITE_FULL_HOST}/shorten`, { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
