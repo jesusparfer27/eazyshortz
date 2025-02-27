@@ -28,7 +28,7 @@ export const shortenURL = async (req, res) => {
         await newURL.save();
 
         res.status(201).json({
-            message: "URL acortada con éxito",
+            message: "URL acortada con éxito", 
             short_url: `${process.env.BASE_URL}/${short_code}`,
             short_code
         });
