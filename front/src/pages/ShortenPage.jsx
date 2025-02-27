@@ -19,6 +19,8 @@ export const ShortenPage = () => {
     const [loading, setLoading] = useState(false) // Estado de carga
 
     const VITE_FULL_HOST = import.meta.env.VITE_FULL_HOST
+    const VITE_REDIRECTION = import.meta.env.VITE_REDIRECTION
+
 
     const validateUrl = (url) => {
         const urlPattern = new RegExp(
@@ -47,7 +49,7 @@ export const ShortenPage = () => {
         setLoading(true);
     
         try {
-            const response = await fetch(`${VITE_FULL_HOST}/shorten`, { 
+            const response = await fetch(`${VITE_REDIRECTION}/shorten`, { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
