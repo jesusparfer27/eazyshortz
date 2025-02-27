@@ -5,12 +5,13 @@ export const RedirectPage = () => {
     const { short_code } = useParams(); // Captura el código de la URL
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const VITE_FULL_HOST = import.meta.env.VITE_FULL_HOST; // Backend en Vercel
+    const VITE_REDIRECTION = import.meta.env.VITE_REDIRECTION
+
 
     useEffect(() => {
         const fetchOriginalUrl = async () => {
             try {
-                const response = await fetch(`${VITE_FULL_HOST}/${short_code}`);
+                const response = await fetch(`${VITE_REDIRECTION}/${short_code}`);
                 const data = await response.json();
 
                 if (response.ok && data.original_url) {
