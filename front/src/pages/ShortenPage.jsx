@@ -18,6 +18,8 @@ export const ShortenPage = () => {
     const [shortUrl, setShortUrl] = useState("") // URL acortada
     const [loading, setLoading] = useState(false) // Estado de carga
 
+    const VITE_FULL_HOST = import.meta.env.VITE_FULL_HOST
+
     const validateUrl = (url) => {
         const urlPattern = new RegExp(
             "^(https?:\\/\\/)?" + 
@@ -45,19 +47,22 @@ export const ShortenPage = () => {
         setLoading(true);
     
         try {
-            const response = await fetch('http://localhost:3000/API/v1/shorten', {
+            const response = await fetch(`${VITE_FULL_HOST}/shorten`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
                     original_url: url, 
-                    title: "Custom Title"  // ✅ Agrega un título
+                    title: title || "Custom Title"
                 }),
             });
-    
+        
             const data = await response.json();
+            console.log("Server response:", data); // 👀 Revisa qué responde el servidor
+        
             if (response.ok) {
                 setShortUrl(data.short_url);
                 setUrl("");
+                setTitle("");
             } else {
                 setError(data.error || "Something went wrong.");
             }
@@ -65,9 +70,18 @@ export const ShortenPage = () => {
             console.error("Error shortening URL:", error);
             setError("Failed to shorten the URL.");
         }
+        
     
         setLoading(false);
     };
+
+    // 🔥 Nueva función para limpiar los inputs y estados
+    // const handleClear = () => {
+    //     setUrl(""); 
+    //     setTitle(""); 
+    //     setError(""); 
+    //     setShortUrl(""); 
+    // };
 
     return (
         <section className="flex flex-col items-center justify-center min-h-screen px-4">
@@ -113,6 +127,16 @@ export const ShortenPage = () => {
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                         Example: https://google.com
                     </p>
+
+                    {/* ✅ Botón "Clear" corregido */}
+                    {/* <Button 
+                        onClick={handleClear} 
+                        disabled={loading} 
+                        className="mt-3 md:mt-0 bg-gray-400 hover:bg-gray-500 text-white font-medium py-2 px-4 rounded-lg transition-all"
+                    >
+                        Clear
+                    </Button> */}
+
                     <Button 
                         onClick={shortUrlHandler} 
                         disabled={loading} 

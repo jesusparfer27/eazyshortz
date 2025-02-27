@@ -14,7 +14,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />, // Página de error por defecto
         children: [
             { index: true, element: <ShortenPage /> }, // Página principal
-            { path: '/redirect', element: <RedirectPage /> }, // Página de productos
+            { path: '/:short_code', element:<RedirectPage /> }, // Página de productos
         ]
     }
 ]);

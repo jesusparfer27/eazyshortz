@@ -21,7 +21,7 @@ const urlSchema = new mongoose.Schema({
         required: true,
         validate: {
             validator: function (v) {
-                return /^(https?:\/\/[^\s/$.?#].[^\s]*)$/i.test(v); // Validación de URL
+                return /^(https?:\/\/[^\s/$.?#].[^\s]*)$/i.test(v);
             },
             message: props => `${props.value} no es una URL válida!`
         }
@@ -29,9 +29,10 @@ const urlSchema = new mongoose.Schema({
     short_code: {
         type: String,
         required: true,
-        unique: true, // 📌 **Evita códigos duplicados**
+        unique: true,
         minlength: 6,
-        maxlength: 10
+        maxlength: 10,
+        default: () => nanoid(7)  // ✅ Genera un código aleatorio de 7 caracteres
     },
     title: {
         type: String,
@@ -39,17 +40,17 @@ const urlSchema = new mongoose.Schema({
     },
     clicks: {
         type: Number,
-        default: 0 // 📌 **Opción para contar visitas**
+        default: 0
     },
     created_at: {
         type: Date,
         default: Date.now
     }
 }, {
-    timestamps: false, // No es necesario porque ya tenemos `created_at`
+    timestamps: false,
     versionKey: false
 });
 
-const URL = mongoose.model('URL', urlSchema, 'shortened_urls');
+const URL = mongoose.model('URL', urlSchema, 'links');
 
 export { connectDB, URL };
