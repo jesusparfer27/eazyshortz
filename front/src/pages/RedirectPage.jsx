@@ -21,7 +21,7 @@ export const RedirectPage = () => {
                 if (response.ok && data.original_url) {
                     window.location.href = data.original_url;
                 } else {
-                    setError("Shortened URL not found.");
+                    setError("Shortened URL not found."); 
                 }
             } catch (err) {
                 setError("An error occurred while fetching the URL.");
