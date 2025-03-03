@@ -11,9 +11,7 @@ export const RedirectPage = () => {
     useEffect(() => {
         const fetchOriginalUrl = async () => {
             try {
-                console.log(`Fetching from: ${VITE_REDIRECTION}${short_code}`); // Verifica si la URL es correcta
-                
-                const response = await fetch(`${VITE_REDIRECTION}${short_code}`);
+                const response = await fetch(`${VITE_REDIRECTION}/short/${short_code}`);
                 
                 if (!response.ok) {
                     throw new Error("Shortened URL not found.");
@@ -26,8 +24,8 @@ export const RedirectPage = () => {
                 console.log("Original URL:", data.original_url); 
 
                 if (data.original_url) {
-                    // Si la URL original está disponible, redirige
-                    navigate(data.original_url, { replace: true });
+                    // Si la URL original está disponible, redirige con window.location.href
+                    window.location.href = data.original_url;
                 } else {
                     setError("Shortened URL not found.");
                 }
@@ -40,13 +38,13 @@ export const RedirectPage = () => {
         };
     
         fetchOriginalUrl();
-    }, [short_code, navigate]);
+    }, [short_code]);
 
     return ( 
         <div className="flex flex-col items-center justify-center h-screen text-center">
             {loading ? (
                 <p className="text-lg font-semibold">Redirecting...</p>
-            ) : error ? (
+            ) : error ? ( 
                 <p className="text-red-500">{error}</p>
             ) : null}
         </div>
