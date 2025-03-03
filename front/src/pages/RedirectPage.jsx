@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export const RedirectPage = () => {
     const { short_code } = useParams(); // Captura el código de la URL
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const VITE_REDIRECTION = import.meta.env.VITE_REDIRECTION;
+    const navigate = useNavigate();
+    const VITE_REDIRECTION = import.meta.env.VITE_REDIRECTION; // Asegúrate de que esta variable está bien configurada
 
     useEffect(() => {
         const fetchOriginalUrl = async () => {
             try {
-                console.log(`Fetching from: ${VITE_REDIRECTION}${short_code}`); // <-- Verificar URL
+                console.log(`Fetching from: ${VITE_REDIRECTION}${short_code}`); // Verifica si la URL es correcta
                 
                 const response = await fetch(`${VITE_REDIRECTION}${short_code}`);
                 
@@ -19,15 +20,11 @@ export const RedirectPage = () => {
                 }
 
                 const data = await response.json();
-
-                console.log("Response Data:", data); // <-- Verificar datos recibidos
+                console.log("Response Data:", data); // Verifica los datos que recibes
 
                 if (data.original_url) {
-                    // 📌 Cambiar la URL en la barra del navegador sin recargar la página
-                    window.history.replaceState(null, "", data.original_url);
-
-                    // 📌 Redirigir a la URL original
-                    window.location.href = data.original_url;
+                    // Si la URL original está disponible, redirige
+                    navigate(data.original_url, { replace: true });
                 } else {
                     setError("Shortened URL not found.");
                 }
@@ -40,7 +37,7 @@ export const RedirectPage = () => {
         };
     
         fetchOriginalUrl();
-    }, [short_code]);
+    }, [short_code, navigate]);
 
     return ( 
         <div className="flex flex-col items-center justify-center h-screen text-center">
