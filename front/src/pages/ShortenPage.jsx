@@ -142,7 +142,7 @@ export const ShortenPage = () => {
                     </Button> */}
 
                     <Button 
-                        onClick={shortUrlHandler} 
+                        onClick={shortUrlHandler}  
                         disabled={loading} 
                         className="mt-3 md:mt-0 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center"
                     >
