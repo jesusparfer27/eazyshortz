@@ -5,8 +5,7 @@ export const RedirectPage = () => {
     const { short_code } = useParams(); // Captura el código de la URL
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const VITE_REDIRECTION = import.meta.env.VITE_REDIRECTION
-
+    const VITE_REDIRECTION = import.meta.env.VITE_REDIRECTION;
 
     useEffect(() => {
         const fetchOriginalUrl = async () => {
@@ -19,6 +18,10 @@ export const RedirectPage = () => {
                 console.log("Response Data:", data); // <-- Verificar datos recibidos
     
                 if (response.ok && data.original_url) {
+                    // 📌 Cambiar la URL en la barra del navegador
+                    window.history.replaceState(null, "", data.original_url);
+
+                    // 📌 Redirigir a la URL original
                     window.location.href = data.original_url;
                 } else {
                     setError("Shortened URL not found."); 
