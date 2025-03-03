@@ -42,7 +42,7 @@ export const RedirectPage = () => {
         fetchOriginalUrl();
     }, [short_code]);
 
-    return (
+    return ( 
         <div className="flex flex-col items-center justify-center h-screen text-center">
             {loading ? (
                 <p className="text-lg font-semibold">Redirecting...</p>
