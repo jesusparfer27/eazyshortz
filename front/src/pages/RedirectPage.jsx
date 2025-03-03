@@ -5,7 +5,7 @@ export const RedirectPage = () => {
     const { short_code } = useParams(); // Captura el código de la URL
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
     const VITE_REDIRECTION = import.meta.env.VITE_REDIRECTION; // Asegúrate de que esta variable está bien configurada
 
     useEffect(() => {
