@@ -1,4 +1,3 @@
-// 📌 **Redirigir a la URL original**
 export const redirectURL = async (req, res) => {
     try {
         const { short_code } = req.params;
@@ -13,7 +12,9 @@ export const redirectURL = async (req, res) => {
         urlDoc.clicks += 1;
         await urlDoc.save();
 
-        res.redirect(urlDoc.original_url);
+        // 📌 Devolver la URL como JSON en lugar de `res.redirect`
+        res.json({ original_url: urlDoc.original_url });
+
     } catch (error) {
         res.status(500).json({ error: "Error en el servidor" });
     }
