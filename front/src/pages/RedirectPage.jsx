@@ -10,9 +10,9 @@ export const RedirectPage = () => {
     useEffect(() => {
         const fetchOriginalUrl = async () => {
             try {
-                console.log(`Fetching from: ${VITE_REDIRECTION}/${short_code}`); // <-- Verificar URL
+                console.log(`Fetching from: ${VITE_REDIRECTION}${short_code}`); // <-- Verificar URL
                 
-                const response = await fetch(`${VITE_REDIRECTION}/short/${short_code}`);
+                const response = await fetch(`${VITE_REDIRECTION}${short_code}`);
                 
                 if (!response.ok) {
                     throw new Error("Shortened URL not found.");

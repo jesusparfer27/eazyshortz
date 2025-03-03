@@ -10,10 +10,10 @@ const router = createBrowserRouter([
         element: <App />,
         errorElement: <ErrorPage />,
         children: [
-            { index: true, element: <ShortenPage /> }
+            { index: true, element: <ShortenPage /> },
+            { path: ':short_code', element: <RedirectPage /> } // 🔥 Ahora está dentro del children
         ]
-    },
-    { path: '/:short_code', element: <RedirectPage /> } // Ahora está al mismo nivel que "/"
+    }
 ]);
 
 export default router;

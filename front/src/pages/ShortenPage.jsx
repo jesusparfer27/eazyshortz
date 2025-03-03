@@ -19,6 +19,7 @@ export const ShortenPage = () => {
     const [loading, setLoading] = useState(false) // Estado de carga
 
     const VITE_FULL_HOST = import.meta.env.VITE_FULL_HOST
+    const VITE_BASE_URL = import.meta.env.VITE_BASE_URL
 
     const validateUrl = (url) => {
         const urlPattern = new RegExp(
@@ -61,7 +62,7 @@ export const ShortenPage = () => {
     
             if (response.ok) {
                 // 🔥 Construimos la URL corta usando el short_code
-                const baseShortUrl = "https://eazyshortz.vercel.app/";
+                const baseShortUrl = `${VITE_BASE_URL}`;
                 setShortUrl(`${baseShortUrl}${data.short_code}`);
     
                 setUrl("");

@@ -5,6 +5,6 @@ import { redirectURL } from '../controllers/redirect.controller.js';
 const router = Router();
 
 router.post("/shorten", shortenURL);
-router.get("/short/:short_code", redirectURL);
+router.get("/:short_code", redirectURL);
 
 export default router;

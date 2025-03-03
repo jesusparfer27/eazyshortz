@@ -1,3 +1,5 @@
+import { URL } from "../db/mongodb.js";
+
 export const redirectURL = async (req, res) => {
     try {
         const { short_code } = req.params;
