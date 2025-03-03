@@ -21,6 +21,9 @@ export const RedirectPage = () => {
 
                 const data = await response.json();
                 console.log("Response Data:", data); // Verifica los datos que recibes
+                
+                // Aquí se agrega un log adicional para verificar la URL original
+                console.log("Original URL:", data.original_url); 
 
                 if (data.original_url) {
                     // Si la URL original está disponible, redirige
