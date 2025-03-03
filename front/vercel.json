@@ -1,0 +1,14 @@
+
+{
+    "rewrites": [
+      {
+        "source": "/:short_code",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
+    ]
+  }
+  
