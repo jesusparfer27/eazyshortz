@@ -18,4 +18,4 @@ export const redirectURL = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: "Error en el servidor" });
     }
-};
+}; 
